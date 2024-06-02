@@ -16,7 +16,7 @@ class LandingPage extends StatelessWidget {
             HeaderSection(),
             HeroSection(),
             CarsSection(),
-            Text("Services Section"),
+            ServiceSection(),
             Text("Testimonial Section"),
             Text("About Us Section"),
             Text("Footer Section"),
@@ -24,6 +24,15 @@ class LandingPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ServiceSection extends StatelessWidget {
+  const ServiceSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
@@ -38,17 +47,19 @@ class CarsSection extends StatelessWidget {
           'Latest Inventory',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
         Text(
           'Experience the future of automotive innovation with our latest car models',
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        SizedBox(height: 20.h),
+        SizedBox(height: 24.h),
         LayoutBuilder(
           builder: (context, constraints) => Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: SizedBox(
-              width: constraints.maxWidth * 0.6,
+              width: constraints.maxWidth > 1024
+                  ? constraints.maxWidth * 0.6
+                  : constraints.maxWidth,
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: constraints.maxWidth > 1024
@@ -58,6 +69,7 @@ class CarsSection extends StatelessWidget {
                           : 1,
                   crossAxisSpacing: 16.w,
                   mainAxisSpacing: 16.h,
+                  childAspectRatio: 3 / 4,
                 ),
                 shrinkWrap: true,
                 itemCount: 6,
@@ -85,17 +97,19 @@ class CarGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.w),
-        border: Border.all(width: 1.w, color: Colors.grey),
+        border: Border.all(width: 1.w, color: Colors.grey.shade300),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
             'https://img.freepik.com/free-photo/view-3d-car_23-2150796896.jpg',
             fit: BoxFit.cover,
-            width: 200.w,
+            width: double.maxFinite,
             errorBuilder: (context, error, stackTrace) => const Icon(
               Icons.error,
               size: 150,
@@ -107,24 +121,113 @@ class CarGridTile extends StatelessWidget {
             "Volswagen Polo GT",
             style: Theme.of(context).textTheme.labelMedium,
           ),
+          SizedBox(height: 8.h),
           Row(
             children: List.generate(
               5,
               (index) => const Icon(
                 Icons.star,
-                size: 16,
+                size: 12,
+                color: Colors.yellow,
               ),
             ),
           ),
-          Wrap(
-            children: [],
+          Expanded(
+            child: Wrap(
+              runSpacing: 16.h,
+              spacing: 16.w,
+              alignment: WrapAlignment.spaceBetween,
+              runAlignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.vertical_shades_closed,
+                      size: 16,
+                    ),
+                    Text(
+                      "6 Seat",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.vertical_shades_closed,
+                      size: 16,
+                    ),
+                    Text(
+                      "2024",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.vertical_shades_closed,
+                      size: 16,
+                    ),
+                    Text(
+                      "Petrol",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.vertical_shades_closed,
+                      size: 16,
+                    ),
+                    Text(
+                      "2 Door",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.vertical_shades_closed,
+                      size: 16,
+                    ),
+                    Text(
+                      "5 Person",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.vertical_shades_closed,
+                      size: 16,
+                    ),
+                    Text(
+                      "80 Km",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "₹ 1200 / day",
-                style: Theme.of(context).textTheme.labelSmall,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
               ElevatedButton(
                 onPressed: () {},
